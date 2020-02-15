@@ -19,6 +19,11 @@ class vec3_ {
             dimension[2] = z;
         }
 
+        vec3_() {
+            static_assert(std::is_arithmetic<Type>::value,
+                          "ERROR: vec3_ uses only arithmetic types.");
+        }
+
         inline Type x() const {
             return dimension[0];
         }
@@ -127,32 +132,32 @@ class vec3_ {
 };
 
 template <typename Type>
-inline vec3_<Type>& operator+(const vec3_<Type>& v1, const vec3_<Type>& v2) {
-    return vec3_<Type>(v1.x() + v2.x(), v1.y() + v2.y(), v1.x() + v1.y());
+inline vec3_<Type> operator+(const vec3_<Type>& v1, const vec3_<Type>& v2) {
+    return vec3_<Type>(v1.x() + v2.x(), v1.y() + v2.y(), v1.z() + v2.z());
 }
 
 template <typename Type>
-inline vec3_<Type>& operator-(const vec3_<Type>& v1, const vec3_<Type>& v2) {
-    return vec3_<Type>(v1.x() - v2.x(), v1.y() - v2.y(), v1.x() - v1.y());
+inline vec3_<Type> operator-(const vec3_<Type>& v1, const vec3_<Type>& v2) {
+    return vec3_<Type>(v1.x() - v2.x(), v1.y() - v2.y(), v1.z() - v1.z());
 }
 
 template <typename Type>
-inline vec3_<Type>& operator*(const vec3_<Type>& v1, const vec3_<Type>& v2) {
-    return vec3_<Type>(v1.x() * v2.x(), v1.y() * v2.y(), v1.x() * v1.y());
+inline vec3_<Type> operator*(const vec3_<Type>& v1, const vec3_<Type>& v2) {
+    return vec3_<Type>(v1.x() * v2.x(), v1.y() * v2.y(), v1.z() * v1.z());
 }
 
 template <typename Type>
-inline vec3_<Type>& operator/(const vec3_<Type>& v1, const vec3_<Type>& v2) {
-    return vec3_<Type>(v1.x() / v2.x(), v1.y() / v2.y(), v1.x() / v1.y());
+inline vec3_<Type> operator/(const vec3_<Type>& v1, const vec3_<Type>& v2) {
+    return vec3_<Type>(v1.x() / v2.x(), v1.y() / v2.y(), v1.z() / v1.z());
 }
 
 template <typename Type>
-inline vec3_<Type>& operator*(const vec3_<Type>& v, const Type& value) {
+inline vec3_<Type> operator*(const vec3_<Type>& v, const Type& value) {
     return vec3_<Type>(v.x() * value, v.y() * value, v.z() * value);
 }
 
 template <typename Type>
-inline vec3_<Type>& operator*(const Type& value, const vec3_<Type>& v) {
+inline vec3_<Type> operator*(const Type& value, const vec3_<Type>& v) {
     return vec3_<Type>(v.x() * value, v.y() * value, v.z() * value);
 }
 
@@ -164,8 +169,8 @@ inline double dot(const vec3_<Type>& v1, const vec3_<Type>& v2) {
 template <typename Type>
 inline double cross(const vec3_<Type>& v1, const vec3_<Type>& v2) {
     return vec3_<Type>(v1.y() * v2.z() - v1.z() * v1.y(),
-                      v1.z() * v2.x() - v1.x() * v2.z(),
-                      v1.x() * v2.y() - v1.y() * v2.x());
+                       v1.z() * v2.x() - v1.x() * v2.z(),
+                       v1.x() * v2.y() - v1.y() * v2.x());
 }
 
 typedef vec3_<float> vec3f;
