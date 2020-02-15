@@ -41,6 +41,17 @@ class vec3_ {
             return dimension[2];
         }
 
+        inline const bool operator==(const vec3_& vec) const {
+            if (this->x() != vec.x() || this->y() != vec.y() || this->z() != vec.z())
+                return false;
+
+            return true;
+        }
+
+        inline const bool operator!=(const vec3_& vec) const {
+            return !(*this == vec);
+        }
+
         inline const vec3_& operator+() const {
             return *this;
         }
@@ -88,15 +99,17 @@ class vec3_ {
         }
 
         inline vec3_& operator/=(const vec3_& vec) {
-            dimension[0] *= vec.x();
-            dimension[1] *= vec.y();
-            dimension[2] *= vec.z();
+            dimension[0] /= vec.x();
+            dimension[1] /= vec.y();
+            dimension[2] /= vec.z();
+
+            return *this;
         }
 
         inline vec3_& operator*=(const Type& value) {
             dimension[0] *= value;
             dimension[1] *= value;
-            dimension[2] += value;;
+            dimension[2] *= value;
 
             return *this;
         }
@@ -139,17 +152,22 @@ inline vec3_<Type> operator+(const vec3_<Type>& v1, const vec3_<Type>& v2) {
 
 template <typename Type>
 inline vec3_<Type> operator-(const vec3_<Type>& v1, const vec3_<Type>& v2) {
-    return vec3_<Type>(v1.x() - v2.x(), v1.y() - v2.y(), v1.z() - v1.z());
+    return vec3_<Type>(v1.x() - v2.x(), v1.y() - v2.y(), v1.z() - v2.z());
 }
 
 template <typename Type>
 inline vec3_<Type> operator*(const vec3_<Type>& v1, const vec3_<Type>& v2) {
-    return vec3_<Type>(v1.x() * v2.x(), v1.y() * v2.y(), v1.z() * v1.z());
+    return vec3_<Type>(v1.x() * v2.x(), v1.y() * v2.y(), v1.z() * v2.z());
 }
 
 template <typename Type>
 inline vec3_<Type> operator/(const vec3_<Type>& v1, const vec3_<Type>& v2) {
-    return vec3_<Type>(v1.x() / v2.x(), v1.y() / v2.y(), v1.z() / v1.z());
+    return vec3_<Type>(v1.x() / v2.x(), v1.y() / v2.y(), v1.z() / v2.z());
+}
+
+template <typename Type>
+inline vec3_<Type> operator/(const vec3_<Type>& v, const Type& value) {
+    return vec3_<Type>(v.x() / value, v.y() / value, v.z() / value);
 }
 
 template <typename Type>
@@ -169,7 +187,7 @@ inline double dot(const vec3_<Type>& v1, const vec3_<Type>& v2) {
 
 template <typename Type>
 inline double cross(const vec3_<Type>& v1, const vec3_<Type>& v2) {
-    return vec3_<Type>(v1.y() * v2.z() - v1.z() * v1.y(),
+    return vec3_<Type>(v1.y() * v2.z() - v1.z() * v2.y(),
                        v1.z() * v2.x() - v1.x() * v2.z(),
                        v1.x() * v2.y() - v1.y() * v2.x());
 }
