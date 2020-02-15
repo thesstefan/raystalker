@@ -169,4 +169,4 @@ inline double cross(const vec3_<Type>& v1, const vec3_<Type>& v2) {
 }
 
 typedef vec3_<float> vec3f;
-typedef vec3_<char> color;
+typedef vec3_<unsigned char> color;
