@@ -7,6 +7,9 @@ SOURCE_INCLUDE = src
 SOURCE := $(wildcard src/*.cpp)
 OBJ := $(addprefix build/obj/, $(notdir $(SOURCE:.cpp=.o)))
 
+TEST_EXCLUDE_OBJ := build/obj/main.o
+TEST_LIBS_OBJ := $(filter-out $(TEST_EXCLUDE_OBJ), $(OBJ))
+
 TEST_SOURCE := $(wildcard test/src/*.cpp)
 TEST_OBJ := $(addprefix build/test_obj/, $(notdir $(TEST_SOURCE:.cpp=.o)))
 
@@ -32,7 +35,7 @@ test: $(TEST_EXE)
 run_test: $(TEST_EXE)
 	./$(TEST_EXE)
 
-$(TEST_EXE): build $(INIT_DOCTEST_OBJ) $(OBJ) $(TEST_OBJ) 
+$(TEST_EXE): build $(TEST_LIBS_OBJ) $(TEST_OBJ) $(INIT_DOCTEST_OBJ)
 	$(CPP) $(CPPFLAGS) -o $(TEST_EXE) $(TEST_OBJ)
 
 $(INIT_DOCTEST_OBJ): build $(INIT_DOCTEST)
