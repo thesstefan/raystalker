@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cmath>
 #include <type_traits>
+#include <exception>
 
 template <typename Type>
 class vec3_ {
@@ -20,6 +21,10 @@ class vec3_ {
         }
 
         vec3_() {
+            dimension[0] = 0;
+            dimension[1] = 0;
+            dimension[2] = 0;
+
             static_assert(std::is_arithmetic<Type>::value,
                           "ERROR: vec3_ uses only arithmetic types.");
         }
@@ -45,19 +50,15 @@ class vec3_ {
         }
 
         inline Type operator[](size_t index) const {
-#ifdef SAFE_MODE
             if (index > 2)
                 throw std::out_of_range("vec3_[] out of range");
-#endif
 
             return dimension[index];
         }
 
         inline Type& operator[](size_t index) {
-#ifdef SAFEMODE
             if (index > 2)
                 throw std::out_of_range("vec3_[] out of range");
-#endif
 
             return dimension[index];
         }
