@@ -376,3 +376,44 @@ TEST_CASE( "vec3 OPERATORS" ) {
         }
     }
 }
+
+TEST_CASE( "vec3 dot & cross") {
+    SUBCASE( "vec3f (float)" ) {
+        SUBCASE( "dot" ) {
+            vec3f vec_1(2, 3, 4);
+            vec3f vec_2(0.5, 0.5, 0.5);
+
+            CHECK( dot(vec_1, vec_2) == 4.5 );
+            CHECK( dot(vec_2, vec_1) == 4.5 );
+        }
+
+        SUBCASE( "cross" ) {
+            vec3f vec_1(2, 3, 4);
+            vec3f vec_2(0.5, 2, 3);
+
+            CHECK ( cross(vec_1, vec_2).x() == 1 );
+            CHECK ( cross(vec_1, vec_2).y() == -4 );
+            CHECK ( cross(vec_1, vec_2).z() == 2.5 );
+
+        }
+    }
+
+    SUBCASE( "color (unsigned char)" ) {
+        SUBCASE( "dot" ) {
+            color col_1(2, 3, 4);
+            color col_2(2, 3, 4);
+
+            CHECK( dot(col_1, col_2) == 29 );
+            CHECK( dot(col_2, col_1) == 29 );
+        }
+
+        SUBCASE( "cross" ) {
+            color col_1(2, 3, 4);
+            color col_2(1, 2, 3);
+
+            CHECK ( cross(col_1, col_2).x() == 1 );
+            CHECK ( cross(col_1, col_2).y() == 254 );
+            CHECK ( cross(col_1, col_2).z() == 1 );
+        }
+    }
+}
