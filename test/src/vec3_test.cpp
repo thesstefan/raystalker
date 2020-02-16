@@ -28,6 +28,13 @@ TEST_CASE( "vec3 CONSTRUCTOR and COMPONENT ACCESS TEST" ) {
             CHECK( vec[1] == 213.2f );
             CHECK( vec[2] == 123213.2f );
         }
+
+        SUBCASE( "copy constructor" ) {
+            const vec3f vec_1(213, 132, 31);
+            const vec3f vec_2(vec_1);
+
+            CHECK ( vec_1 == vec_2 );
+        }
     }
 
     SUBCASE( "color (unsigned char)" ) {
@@ -53,6 +60,13 @@ TEST_CASE( "vec3 CONSTRUCTOR and COMPONENT ACCESS TEST" ) {
             CHECK( col[0] == 255 );
             CHECK( col[1] == 255 );
             CHECK( col[2] == 128 );
+        }
+
+        SUBCASE( "copy constructor" ) {
+            const vec3f vec_1(213, 132, 31);
+            const vec3f vec_2(vec_1);
+
+            CHECK ( vec_1 == vec_2 );
         }
     }
 
@@ -93,6 +107,15 @@ TEST_CASE( "vec3 OPERATORS" ) {
 
             CHECK ( vec_1 == vec_2 );
             CHECK ( !(vec_1 != vec_2) );
+        }
+
+        SUBCASE( "assignment" ) {
+            vec3f vec_1(100, 200, 300);
+            vec3f vec_2(500, 600, 700);
+
+            vec_1 = vec_2;
+
+            CHECK ( vec_1 == vec_2 );
         }
 
         SUBCASE( "addition" ) {
@@ -238,6 +261,15 @@ TEST_CASE( "vec3 OPERATORS" ) {
 
             CHECK ( col_1 == col_2 );
             CHECK ( !(col_1 != col_2) );
+        }
+
+        SUBCASE( "assignment" ) {
+            vec3f vec_1(100, 200, 10);
+            vec3f vec_2(50, 60, 70);
+
+            vec_1 = vec_2;
+
+            CHECK ( vec_1 == vec_2 );
         }
 
         SUBCASE( "addition" ) {
