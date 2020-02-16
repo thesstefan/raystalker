@@ -339,6 +339,23 @@ class vec3_ {
             dimension[1] /= len;
             dimension[2] /= len;
         }
+
+        /** 
+         * @brief Returns the normalized version of the vector.
+         *
+         * @warning Currently, the multiplication operators
+         *          are defined for scalars/vectors of the same type as the
+         *          vector components. That means that normalizing
+         *          a non-floating point type vector doesn't work very
+         *          well, so using @ref vec3_convert is recommended.
+         */
+        inline vec3_ getNormalized() {
+            int len = this->length();
+
+            return vec3_(dimension[0] / len,
+                         dimension[1] / len,
+                         dimension[2] / len);
+        }
 };
 
 /** 

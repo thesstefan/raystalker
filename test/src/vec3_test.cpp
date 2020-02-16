@@ -464,8 +464,8 @@ TEST_CASE( "vec3 length" ) {
     }
 }
 
-TEST_CASE( "vec3 normalize" ) {
-    SUBCASE( "vec3f (float)" ) {
+TEST_CASE( "vec3 normalize & getNormalized" ) {
+    SUBCASE( "normalize" ) {
         vec3f vec(2, 3, 6);
 
         vec.normalize();
@@ -473,6 +473,16 @@ TEST_CASE( "vec3 normalize" ) {
         CHECK ( vec.x() == 2 / 7.f );
         CHECK ( vec.y() == 3 / 7.f);
         CHECK ( vec.z() == 6 / 7.f );
+    }
+
+    SUBCASE( "getNormalized" ) {
+        vec3f vec_1(2, 3, 6);
+
+        vec3f vec_2 = vec_1.getNormalized();
+
+        CHECK ( vec_2.x() == 2 / 7.f );
+        CHECK ( vec_2.y() == 3 / 7.f);
+        CHECK ( vec_2.z() == 6 / 7.f );
     }
 }
 
