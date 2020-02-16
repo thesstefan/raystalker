@@ -333,11 +333,11 @@ class vec3_ {
          *          well, so using @ref vec3_convert is recommended.
          */
         inline void normalize() {
-            double K = 1.0 / this.squared_length();
+            int len = this->length();
 
-            dimension[0] *= this.squared_length();
-            dimension[1] *= this.squared_length();
-            dimension[2] *= this.squared_length();
+            dimension[0] /= len;
+            dimension[1] /= len;
+            dimension[2] /= len;
         }
 };
 

@@ -450,7 +450,33 @@ TEST_CASE( "vec3 dot & cross") {
     }
 }
 
-TEST_CASE ( "vec3 convert" ) {
+TEST_CASE( "vec3 length" ) {
+    SUBCASE( "normal" ) {
+        vec3f vec(3, 4, 5);
+
+        CHECK( vec.length() == sqrt(50) );
+    }
+
+    SUBCASE( "squared" ) {
+        vec3f vec(4, 5, 6);
+
+        CHECK( vec.squared_length() == 77 );
+    }
+}
+
+TEST_CASE( "vec3 normalize" ) {
+    SUBCASE( "vec3f (float)" ) {
+        vec3f vec(2, 3, 6);
+
+        vec.normalize();
+
+        CHECK ( vec.x() == 2 / 7.f );
+        CHECK ( vec.y() == 3 / 7.f);
+        CHECK ( vec.z() == 6 / 7.f );
+    }
+}
+
+TEST_CASE( "vec3 convert" ) {
     SUBCASE( "float -> int") {
         vec3f vec_1(123.123, 12321.3123, 123213.1);
 
