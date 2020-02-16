@@ -186,7 +186,7 @@ inline double dot(const vec3_<Type>& v1, const vec3_<Type>& v2) {
 }
 
 template <typename Type>
-inline double cross(const vec3_<Type>& v1, const vec3_<Type>& v2) {
+inline vec3_<Type> cross(const vec3_<Type>& v1, const vec3_<Type>& v2) {
     return vec3_<Type>(v1.y() * v2.z() - v1.z() * v2.y(),
                        v1.z() * v2.x() - v1.x() * v2.z(),
                        v1.x() * v2.y() - v1.y() * v2.x());
