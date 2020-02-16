@@ -11,6 +11,15 @@ class vec3_ {
         Type dimension[3];
 
     public:
+        vec3_() {
+            dimension[0] = 0;
+            dimension[1] = 0;
+            dimension[2] = 0;
+
+            static_assert(std::is_arithmetic<Type>::value,
+                          "ERROR: vec3_ uses only arithmetic types.");
+        }
+
         vec3_(const Type& x, const Type& y, const Type& z) {
             static_assert(std::is_arithmetic<Type>::value,
                           "ERROR: vec3_ uses only arithmetic types.");
@@ -20,13 +29,13 @@ class vec3_ {
             dimension[2] = z;
         }
 
-        vec3_() {
-            dimension[0] = 0;
-            dimension[1] = 0;
-            dimension[2] = 0;
-
+        vec3_(const vec3_& vec) {
             static_assert(std::is_arithmetic<Type>::value,
                           "ERROR: vec3_ uses only arithmetic types.");
+
+            dimension[0] = vec.x();
+            dimension[1] = vec.y();
+            dimension[2] = vec.z();
         }
 
         inline Type x() const {
@@ -39,6 +48,14 @@ class vec3_ {
 
         inline Type z() const {
             return dimension[2];
+        }
+
+        inline vec3_& operator=(const vec3_& vec) {
+            dimension[0] = vec.x();
+            dimension[1] = vec.y();
+            dimension[2] = vec.z();
+
+            return *this;
         }
 
         inline const bool operator==(const vec3_& vec) const {
