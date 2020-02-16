@@ -209,5 +209,12 @@ inline vec3_<Type> cross(const vec3_<Type>& v1, const vec3_<Type>& v2) {
                        v1.x() * v2.y() - v1.y() * v2.x());
 }
 
+template <typename inType, typename outType>
+inline vec3_<outType> vec3_convert(const vec3_<inType>& vec) {
+    return vec3_<outType>(static_cast<outType>(vec.x()),
+                          static_cast<outType>(vec.y()),
+                          static_cast<outType>(vec.z()));
+}
+
 typedef vec3_<float> vec3f;
 typedef vec3_<unsigned char> color;
