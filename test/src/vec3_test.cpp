@@ -3,7 +3,7 @@
 
 #include <limits>
 
-TEST_CASE( "vec3 CONSTRUCTOR and COMPONENT ACCESS TEST" ) {
+TEST_CASE( "vec3 constructors and component access" ) {
     SUBCASE( "vec3f (float)" ) {
         SUBCASE( "default constructor" ) {
             const vec3f vec;
@@ -99,7 +99,7 @@ TEST_CASE( "vec3 CONSTRUCTOR and COMPONENT ACCESS TEST" ) {
     }
 }
 
-TEST_CASE( "vec3 OPERATORS" ) {
+TEST_CASE( "vec3 operators" ) {
     SUBCASE( "vec3f (float)" ) {
         SUBCASE( "equality and inequality" ) {
             vec3f vec_1(100, 200, 300);
@@ -447,5 +447,15 @@ TEST_CASE( "vec3 dot & cross") {
             CHECK ( cross(col_1, col_2).y() == 254 );
             CHECK ( cross(col_1, col_2).z() == 1 );
         }
+    }
+}
+
+TEST_CASE ( "vec3 convert" ) {
+    SUBCASE( "float -> int") {
+        vec3f vec_1(123.123, 12321.3123, 123213.1);
+
+        vec3_<int> vec_2 = vec3_convert<float, int>(vec_1);
+
+        CHECK ( vec_2 == vec3_<int>(123, 12321, 123213) );
     }
 }
